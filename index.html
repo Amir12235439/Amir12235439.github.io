@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرفی و دانلود بازی | Steam Fan</title>
+    <title>استیم فن | معرفی و دانلود بازی‌ها</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,40 +12,75 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #1b2838; /* رنگ پس‌زمینه استیم */
+            background-color: #1b2838;
             color: #c7d5e0;
             padding: 20px;
         }
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             background: #171a21;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-        .header-banner {
-            background: linear-gradient(rgba(0,0,0,0.1), rgba(23,26,33,1)), url('https://picsum.photos') no-repeat center center/cover;
-            height: 300px;
+        /* منوی انتخاب بازی */
+        .game-menu {
             display: flex;
-            align-items: flex-end;
-            padding: 30px;
+            background: #101216;
+            padding: 10px;
+            gap: 10px;
+            overflow-x: auto;
+            border-bottom: 2px solid #2a475e;
         }
-        .game-title {
+        .menu-btn {
+            background: #2a475e;
             color: #fff;
-            font-size: 2.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+        .menu-btn.active, .menu-btn:hover {
+            background: #66c0f4;
+            color: #171a21;
         }
         .content {
             padding: 30px;
         }
-        h2 {
+        .game-title {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        /* بخش تریلر بازی */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* نسبت تصویر 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 6px;
+            background: #000;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        h3 {
             color: #66c0f4;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #2a475e;
+            margin-bottom: 10px;
             padding-bottom: 5px;
         }
-        p {
+        .description {
             line-height: 1.8;
             margin-bottom: 25px;
             text-align: justify;
@@ -55,11 +90,6 @@
             padding: 20px;
             border-radius: 6px;
             margin-bottom: 30px;
-        }
-        .specs-title {
-            color: #fff;
-            font-weight: bold;
-            margin-bottom: 10px;
         }
         .specs-list {
             list-style: none;
@@ -73,7 +103,6 @@
         }
         .download-box {
             text-align: center;
-            margin-top: 40px;
             padding: 20px;
             background: rgba(102, 192, 244, 0.1);
             border: 1px dashed #66c0f4;
@@ -93,44 +122,99 @@
         }
         .btn-steam:hover {
             transform: scale(1.05);
-            background: linear-gradient(to right, #b8e60b, #648600);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- بنر بالای صفحه -->
-        <div class="header-banner">
-            <h1 class="game-title">نام بازی شما (مثلاً Counter-Strike 2)</h1>
+        <!-- منوی دکمه‌ها برای سوییچ بین بازی‌ها -->
+        <div class="game-menu">
+            <button class="menu-btn active" onclick="switchGame('cs2')">Counter-Strike 2</button>
+            <button class="menu-btn" onclick="switchGame('quack')">Quack Quack Up</button>
+            <button class="menu-btn" onclick="switchGame('dota2')">Dota 2</button>
         </div>
 
         <div class="content">
-            <!-- بخش معرفی -->
-            <h2>درباره بازی</h2>
-            <p>در این قسمت می‌توانید توضیحات جذاب، داستان بازی و ویژگی‌های کلیدی آن را بنویسید. برای مثال: این بازی یکی از محبوب‌ترین بازی‌های شوتر اول شخص در پلتفرم استیم است که با گرافیک خیره‌کننده و گیم‌پلی تاکتیکال خود، میلیون‌ها بازیکن را در سراسر جهان به خود جذب کرده است.</p>
+            <!-- عنوان بازی -->
+            <h1 id="game-title" class="game-title">Counter-Strike 2</h1>
 
-            <!-- بخش سیستم مورد نیاز -->
-            <h2>سیستم مورد نیاز برای اجرا</h2>
+            <!-- بخش ویدیو تریلر -->
+            <div class="video-container">
+                <!-- در اینجا لینک ویدیو قرار می‌گیرد -->
+                <iframe id="game-trailer" src="https://aparat.com" allowfullscreen="true"></iframe>
+            </div>
+
+            <!-- توضیحات بازی -->
+            <h3>درباره بازی</h3>
+            <p id="game-desc" class="description">نسخه جدید و تکامل‌یافته بازی محبوب کانتر استرایک که با موتور گرافیکی اسمارت ۲ (Source 2) بازسازی شده است. این بازی شوتر تاکتیکال رقابتی، استانداردهای جدیدی را در بازی‌های آنلاین خلق کرده است.</p>
+
+            <!-- سیستم مورد نیاز -->
+            <h3>سیستم مورد نیاز</h3>
             <div class="specs">
-                <p class="specs-title">حداقل سیستم پیشنهادی:</p>
-                <ul class="specs-list">
-                    <li><strong>سیستم عامل:</strong> Windows 10/11 (64-bit)</li>
+                <ul id="game-specs" class="specs-list">
+                    <li><strong>سیستم عامل:</strong> Windows 10 (64-bit)</li>
                     <li><strong>پردازنده:</strong> Intel Core i5 یا AMD Ryzen 5</li>
-                    <li><strong>حافظه رم:</strong> 8 گیگابایت RAM</li>
-                    <li><strong>کارت گرافیک:</strong> GTX 1060 یا RX 580</li>
-                    <li><strong>فضای ذخیره‌سازی:</strong> 50 گیگابایت فضای خالی</li>
+                    <li><strong>حافظه رم:</strong> 8 گیگابایت</li>
+                    <li><strong>کارت گرافیک:</strong> GTX 1060 / RX 580</li>
                 </ul>
             </div>
 
-            <!-- بخش دکمه دانلود استیم -->
+            <!-- دکمه دانلود -->
             <div class="download-box">
-                <p style="margin-bottom: 15px; font-weight: bold;">جهت دریافت و نصب بازی، روی دکمه زیر کلیک کنید تا وارد صفحه بازی در استیم شوید:</p>
-                <!-- آدرس صفحه بازی در استیم را بجای علامت # در href قرار دهید -->
-                <a href="https://steampowered.com" target="_blank" class="btn-steam">📥 دانلود بازی از استیم (Steam)</a>
+                <a id="game-link" href="https://steampowered.com" target="_blank" class="btn-steam">📥 دانلود بازی از استیم</a>
             </div>
         </div>
     </div>
 
+    <script>
+        // اطلاعات بازی‌ها (می‌توانید تریلرها و لینک‌ها را تغییر دهید)
+        const gamesData = {
+            cs2: {
+                title: "Counter-Strike 2",
+                trailer: "https://aparat.com", // کد امبد تریلر کانتر
+                desc: "نسخه جدید و تکامل‌یافته بازی محبوب کانتر استرایک که با موتور گرافیکی سورس ۲ (Source 2) بازسازی شده است. این بازی شوتر تاکتیکال رقابتی، استانداردهای جدیدی را در بازی‌های آنلاین آنلاین خلق کرده است.",
+                specs: `<li><strong>سیستم عامل:</strong> Windows 10 (64-bit)</li>
+                        <li><strong>پردازنده:</strong> Intel Core i5 6600K / AMD Ryzen 5 1600</li>
+                        <li><strong>حافظه رم:</strong> 12 گیگابایت</li>
+                        <li><strong>کارت گرافیک:</strong> GTX 1060 / RX 580</li>`,
+                link: "https://steampowered.com"
+            },
+            quack: {
+                title: "Quack Quack Up",
+                trailer: "https://aparat.com", // لینک فرضی ویدیو
+                desc: "یک بازی سرگرم‌کننده و جذاب مستقل در استیم که در آن کنترل اردک‌های بامزه را برعهده دارید. این بازی با چالش‌های فیزیکی و محیط‌های خنده‌دار خود، تجربه‌ای عالی برای بازی‌های گروهی و دورهمی است.",
+                specs: `<li><strong>سیستم عامل:</strong> Windows 7/10/11</li>
+                        <li><strong>پردازنده:</strong> Intel Dual Core 2.0 GHz</li>
+                        <li><strong>حافظه رم:</strong> 4 گیگابایت</li>
+                        <li><strong>کارت گرافیک:</strong> Intel HD Graphics</li>`,
+                link: "https://steampowered.com" // لینک صفحه بازی را اینجا بگذارید
+            },
+            dota2: {
+                title: "Dota 2",
+                trailer: "https://aparat.com", // لینک فرضی ویدیو
+                desc: "یکی از بزرگ‌ترین و عمیق‌ترین بازی‌های سبک استراتژیک و MOBA در جهان. در دوتا ۲ شما در قالب دو تیم ۵ نفره با قهرمانان مختلف برای نابودی پایگاه دشمن به رقابت می‌پردازید.",
+                specs: `<li><strong>سیستم عامل:</strong> Windows 7 or newer</li>
+                        <li><strong>پردازنده:</strong> Intel Dual Core / AMD 2.8 GHz</li>
+                        <li><strong>حافظه رم:</strong> 4 گیگابایت</li>
+                        <li><strong>کارت گرافیک:</strong> NVIDIA GeForce 8600/9600GT</li>`,
+                link: "https://steampowered.com/app/570/Dota_2/"
+            }
+        };
+
+        function switchGame(gameKey) {
+            // تغییر دکمه فعال
+            document.querySelectorAll('.menu-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // تغییر اطلاعات صفحه بر اساس بازی انتخابی
+            const game = gamesData[gameKey];
+            document.getElementById('game-title').innerText = game.title;
+            document.getElementById('game-trailer').src = game.trailer;
+            document.getElementById('game-desc').innerText = game.desc;
+            document.getElementById('game-specs').innerHTML = game.specs;
+            document.getElementById('game-link').href = game.link;
+        }
+    </script>
 </body>
 </html>
