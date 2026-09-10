@@ -128,7 +128,6 @@
     <div class="container">
         <div class="game-menu">
             <button class="menu-btn active" onclick="switchGame('cs2')">Counter-Strike 2</button>
-            <button class="menu-btn" onclick="switchGame('quack')">Quack Quack Up</button>
             <button class="menu-btn" onclick="switchGame('gta5')">GTA V</button>
             <button class="menu-btn" onclick="switchGame('dota2')">Dota 2</button>
         </div>
@@ -137,11 +136,12 @@
             <h1 id="game-title" class="game-title">Counter-Strike 2</h1>
 
             <div class="video-container">
-                <iframe id="game-trailer" src="https://aparat.com" allowfullscreen="true"></iframe>
+                <!-- استفاده از امبد مطمئن یوتیوب -->
+                <iframe id="game-trailer" src="https://youtube.com" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
 
             <h3>درباره بازی</h3>
-            <p id="game-desc" class="description">نسخه جدید و تکامل‌یافته بازی محبوب کانتر استرایک که با موتور گرافیکی سورس ۲ (Source 2) بازسازی شده است. این بازی شوتر تاکتیکال رقابتی، استانداردهای جدیدی را در بازی‌های آنلاین آنلاین خلق کرده است.</p>
+            <p id="game-desc" class="description">نسخه جدید و تکامل‌یافته بازی محبوب کانتر استرایک که با موتور گرافیکی سورس ۲ (Source 2) بازسازی شده است. این بازی شوتر تاکتیکال رقابتی، استانداردهای جدیدی را در بازی‌های آنلاین خلق کرده است.</p>
 
             <h3>سیستم مورد نیاز</h3>
             <div class="specs">
@@ -163,7 +163,7 @@
         const gamesData = {
             cs2: {
                 title: "Counter-Strike 2",
-                trailer: "https://aparat.com",
+                trailer: "https://youtube.com",
                 desc: "نسخه جدید و تکامل‌یافته بازی محبوب کانتر استرایک که با موتور گرافیکی سورس ۲ (Source 2) بازسازی شده است. این بازی شوتر تاکتیکال رقابتی، استانداردهای جدیدی را در بازی‌های آنلاین خلق کرده است.",
                 specs: `<li><strong>سیستم عامل:</strong> Windows 10 (64-bit)</li>
                         <li><strong>پردازنده:</strong> Intel Core i5 6600K / AMD Ryzen 5 1600</li>
@@ -171,20 +171,9 @@
                         <li><strong>کارت گرافیک:</strong> GTX 1060 / RX 580</li>`,
                 link: "https://steampowered.com"
             },
-            quack: {
-                title: "Quack Quack Up",
-                // لینک یک ویدیوی گیم‌پلی فان و واقعی جایگزین شد تا کادر آبی برطرف شود
-                trailer: "https://aparat.com", 
-                desc: "یک بازی مستقل بسیار خنده‌دار و فیزیک‌محور در استیم که در آن به همراه دوستانتان کنترل اردک‌های بامزه را برعهده می‌گیرید و باید چالش‌های محیطی مختلف را پشت سر بگذارید.",
-                specs: `<li><strong>سیستم عامل:</strong> Windows 10/11</li>
-                        <li><strong>پردازنده:</strong> Intel Core i3 یا مشابه</li>
-                        <li><strong>حافظه رم:</strong> 4 گیگابایت</li>
-                        <li><strong>کارت گرافیک:</strong> Intel HD Graphics 4000</li>`,
-                link: "https://steampowered.com" 
-            },
             gta5: {
                 title: "Grand Theft Auto V",
-                trailer: "https://aparat.com",
+                trailer: "https://youtube.com",
                 desc: "یکی از پرفروش‌ترین و محبوب‌ترین بازی‌های جهان‌باز تاریخ. داستان بازی در شهر لوس سانتوس جریان دارد و شما کنترل سه شخصیت مختلف با داستان‌های به هم پیوسته را بر عهده دارید.",
                 specs: `<li><strong>سیستم عامل:</strong> Windows 10 (64-bit)</li>
                         <li><strong>پردازنده:</strong> Intel Core i5 3470 / AMD X8 FX-8350</li>
@@ -194,7 +183,7 @@
             },
             dota2: {
                 title: "Dota 2",
-                trailer: "https://aparat.com",
+                trailer: "https://youtube.com",
                 desc: "بزرگ‌ترین بازی سبک موبا (MOBA) در استیم که دو تیم ۵ نفره در نقشه بازی برای نابود کردن سازه اصلی دشمن به نام Ancient با یکدیگر به رقابت می‌پردازند.",
                 specs: `<li><strong>سیستم عامل:</strong> Windows 7 or newer</li>
                         <li><strong>پردازنده:</strong> Intel Dual Core / AMD 2.8 GHz</li>
